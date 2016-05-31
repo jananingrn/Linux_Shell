@@ -1,0 +1,39 @@
+#! /bin/bash 
+if [ -d /home/admin01/Downloads/files ] 
+then 
+cd /home/admin01/Downloads/files 
+declare -a months=("Jan" "Feb" "Mar" "Apr" "May" "Jun" "Jul" "Aug" "Sep" "Oct" "Nov" "Dec") 
+for i in `seq 0 11` 
+do
+ mkdir ${months[$i]}  
+done 
+if [ -e logfile.log ] 
+then 
+echo "Log file exists"   
+else
+`touch logfile.log` 
+fi
+for entry in `ls` 
+do 
+num=$( echo "$entry"|cut -c 13-14 )
+num=${num#0} 
+num=$((num-1)) 
+if [ $num -gt -1 ]
+then
+mv $entry ${months[$num]}
+echo "$entry  ${months[$num]}  `date`" >> logfile.log
+fi
+done 
+for dir in `ls` 
+do 
+if [ -d $dir ] 
+then 
+cd $dir 
+echo "The number of files in $dir is `ls | wc -l`" 
+cd .. 
+fi 
+done 
+else
+echo "Directory does not exists" 
+fi 
+

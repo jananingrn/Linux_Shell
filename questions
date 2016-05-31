@@ -1,0 +1,6 @@
+Given tar.gz file containing may log files.
+These log files contains the date of generation in their file names.
+
+1. Group these files in directories based on month date generated.
+2. Print the count of files in each directory.
+3. Log which files were moved to which directory.
